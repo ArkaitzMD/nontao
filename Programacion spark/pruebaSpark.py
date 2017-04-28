@@ -1,4 +1,7 @@
-# Databricks notebook source
+# 
+#   Distintas maneras de cargar datos tanto en formato csv como en formato json 
+#   la mayoria de ellas me fallaron en el reconocimiento de la ruta donde estaba el archivo
+
 from pyspark.sql.types import StructType
 from pyspark.sql.types import StructField
 from pyspark.sql.types import StringType
@@ -14,7 +17,7 @@ df = rdd.toDF()
 # COMMAND ----------
 
 import csv
-rdd2 = sc.textFile("2017-04-24_nontao.csv")
+rdd2 = sc.textFile("nontao.csv")
 rdd2 = rdd2.mapPartitions(lambda x: csv.reader(x))
 print rdd2
 
@@ -25,7 +28,7 @@ pruebas2 = pruebas.map(lambda p: (p[0], p[1].strip()))
 
 # COMMAND ----------
 
-sc = new SparkContext(args(0), "Csv loading example")
+sc = new SparkContext(args(0), "nontao.csv")
 sqlContext = new org.apache.spark.sql.SQLContext(sc)
 df = sqlContext.load("com.databricks.spark.csv", Map("path" -> args(1),"header"->"true"))
 df.printSchema()
@@ -43,7 +46,7 @@ from pyspark.sql.types import StringType
 from pyspark import SQLContext
 sqlContext = SQLContext(sc)
 
-Employee_rdd = sc.textFile("\..\2017-04-24_nontao.csv").map(lambda line: line.split(","))
+Employee_rdd = sc.textFile("\..\nontao.csv").map(lambda line: line.split(","))
 
 Employee_df = Employee_rdd.toDF(['Machine','Calendar','Time'])
 
