@@ -1,4 +1,5 @@
-// Databricks notebook source
+// Ejemplo para arrancar con SparkStreaming un programa sencillo de wordCount
+// Tuve problemas con el puerto de entrada 9999, no se mantenia abierto (nc -lk 9999)
 import org.apache.spark.SparkConf
 import org.apache.spark._
 import org.apache.spark.streaming._
